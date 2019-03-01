@@ -2,60 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const data = require('./data.js');
 
-
-
-
-
-title.Type String.It should be required and unique.
-  level.Type String.Only can be one of the following values: Easy Peasy - Amateur Chef - UltraPro Chef(remember the ENUM wink)
-ingredients.Type Array.
-  cuisine.Type String.Should be required.
-    dishType.Type String.Possible values: Breakfast - Dish - Snack - Drink - Dessert - Other.
-      image.Type String.Default value: https://images.media-allrecipes.com/images/75131.jpg.
-      duration.Type Number.Min value should be 0.
-creator.Type String
-created.Type Date.By default today.
-
-
-const recipeSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  level: {
-    type: String,
-    enum: ['Easy Peasy', 'Amateur Chef', 'UltraPro Chef']
-  },
-  ingredients: {
-    type: Array
-  },
-  cuisine: {
-    type: String,
-    required: true
-  },
-  dishType: {
-    type: String,
-    enum: ['Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other']
-  },
-  image: {
-    type: String,
-    default: 'https://images.media-allrecipes.com/images/75131.jpg'
-  },
-  duration: {
-    type: Number,
-    min: 0
-  },
-  creator: {
-    type: String
-  },
-  created: {
-    type: Date,
-    default: Date.now
-  }
-
-})
-
+const Recipes = require('./recipes-schema')
 
 mongoose.connect('mongodb://localhost/recipeApp')
   .then(() => {
@@ -63,3 +10,35 @@ mongoose.connect('mongodb://localhost/recipeApp')
   }).catch(err => {
     console.error('Error connecting to mongo', err);
   });
+
+
+// Recipes.insertMany(data)
+//   .then(result => {
+//     console.log(result);
+//     mongoose.connection.close();
+//   })
+//   .catch(err => console.error(err));
+
+// Recipes.find({}, { title: true })
+//   .then(result => {
+//     console.log(result)
+//     mongoose.connection.close();
+//   })
+//   .catch(err => console.error(err));
+
+
+// Recipes.findByIdAndUpdate('5c79141d59a86d3eab417d6c', { duration: 100 }, { new: true })
+//   .then(result => {
+//     console.log(result);
+//     mongoose.connection.close();
+//   })
+//   .catch(err => console.error(error));
+
+// Recipes.findByIdAndRemove('5c79141d59a86d3eab417d6b')
+//   .then(result => {
+//     console.log('Succesfully removed');
+//     mongoose.connection.close();
+//   })
+//   .catch(err => console.error(err));
+
+// mongoose.connection.close();
